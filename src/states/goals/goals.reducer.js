@@ -4,6 +4,8 @@ const goalsReducer = (goals = [], action = {}) => {
       return [...goals, action.payload];
     case "DELETE_GOAL":
       return goals.filter((goal) => goal.id !== action.payload.id);
+    case "RECEIVE_GOALS":
+      return action.payload.goals;
     default:
       return goals;
   }

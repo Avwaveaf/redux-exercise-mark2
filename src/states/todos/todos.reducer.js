@@ -10,7 +10,7 @@ const todosReducer = (todos = [], action = {}) => {
         if (todo.id === action.payload.id) {
           return {
             ...todo,
-            isCompleted: !todo.isCompleted,
+            complete: !todo.complete,
           };
         }
         return todo;
@@ -25,6 +25,8 @@ const todosReducer = (todos = [], action = {}) => {
         }
         return todo;
       });
+    case "RECEIVE_TODO":
+      return action.payload.todos;
     default:
       return todos;
   }

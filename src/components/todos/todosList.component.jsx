@@ -2,30 +2,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { TodosInput } from "./todosinput.component";
 import {
   addTodoActionCreator,
+  asyncAddTodo,
+  asyncDeleteTodo,
+  asyncReceveTodos,
+  asyncToggleTodo,
   deleteTodoActionCreator,
   toggleTodoActionCreator,
 } from "../../states/todos/todos.action";
 import { TodosItem } from "./todosItem.component";
+import { useEffect } from "react";
 export const TodosList = () => {
   const todos = useSelector((states) => states.todos);
   const dispatch = useDispatch();
   const onAddTodoHandler = (text) => {
-    const id = todos.length + 1;
-    dispatch(
-      addTodoActionCreator({
-        id,
-        text,
-      })
-    );
+    dispatch(asyncAddTodo(text));
   };
   const onDeleteTodoHandler = (id) => {
+    dispatch(asyncDeleteTodo(id));
     
-    dispatch(deleteTodoActionCreator({ id }));
   };
   const onToggleTodoHandler = (id) => {
-    dispatch(toggleTodoActionCreator({ id }));
+    dispatch(asyncToggleTodo(id));
   };
-  console.log(todos);
+  useEffect(() => {
+    dispatch(asyncReceveTodos());
+  }, [dispatch]);
+
   return (
     <div>
       <h1>My Todos List</h1>

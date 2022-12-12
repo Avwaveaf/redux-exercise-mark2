@@ -1,10 +1,10 @@
-export const TodosItem = ({ id, text, toggleTodo, deleteTodo, isComplete }) => {
+export const TodosItem = ({ id, text, toggleTodo, deleteTodo, complete }) => {
   return (
     <div>
       <input
         type="checkbox"
         onChange={() => toggleTodo(id)}
-        checked={isComplete}
+        checked={complete}
       />
       <span>{text}</span>
       <button onClick={() => deleteTodo(id)}>X</button>
