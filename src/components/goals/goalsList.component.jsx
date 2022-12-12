@@ -1,12 +1,19 @@
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addGoalsActionCreator,
+  deleteGoalsActionCreator,
+} from "../../states/goals/goals.action";
 import { GoalsInput } from "./goalsInput.component";
 import { GoalsItem } from "./goalsItem.component";
 export const GoalsList = () => {
-  const goals = [];
+  const goals = useSelector((states) => states.goals);
+  const dispatch = useDispatch();
   const onAddGoal = (text) => {
-    console.log(text);
+    const id = goals.length + 1;
+    dispatch(addGoalsActionCreator({ id, text }));
   };
   const onDeleteGoals = (id) => {
-    console.log(id);
+    dispatch(deleteGoalsActionCreator({ id }));
   };
   return (
     <div>
@@ -15,7 +22,7 @@ export const GoalsList = () => {
       <ul>
         {goals.map((goal) => {
           return (
-            <li>
+            <li key={goal.id}>
               <GoalsItem
                 id={goal.id}
                 text={goal.text}
