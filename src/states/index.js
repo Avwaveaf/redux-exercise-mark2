@@ -1,11 +1,15 @@
-import { createStore } from "redux";
-import rootReducer from "./rootReducer";
-import { applyMiddleware } from "redux";
-import { thunk, todoDeletionCheck } from "./middlewares";
+import { configureStore } from "@reduxjs/toolkit";
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk, todoDeletionCheck)
-);
+import { thunk, todoDeletionCheck } from "./middlewares";
+import { todosReducer } from "./todos/todos.reducer";
+import { goalsReducer } from "./goals/goals.reducer";
+
+const store = configureStore({
+  reducer: {
+    todos: todosReducer,
+    goals: goalsReducer,
+  },
+  middleware: [thunk, todoDeletionCheck],
+});
 
 export { store };

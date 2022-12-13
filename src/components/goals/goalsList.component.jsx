@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addGoalsActionCreator,
   asyncAddGoals,
   asyncDeleteGoals,
   asyncReceiveGoals,
-  deleteGoalsActionCreator,
-  receiveGoalsActionCreator,
 } from "../../states/goals/goals.action";
 import { GoalsInput } from "./goalsInput.component";
 import { GoalsItem } from "./goalsItem.component";
